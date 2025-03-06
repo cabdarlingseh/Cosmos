@@ -1,4 +1,29 @@
+body.theme-dark {
+    background: linear-gradient(135deg, #1a1a2e, #16213e);
+    color: #ffdfdf;
+}
+
+body.theme-mars {
+    background: linear-gradient(135deg, #ff4500, #8b0000);
+    color: #181313;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Noto Sans",
+        "Kanit",
+        "DM Sans",
+        sans-serif;
+    ;
+}
+
 .card {
     background-color: rgba(255, 255, 255, 0.1);
     border: none;
+    color: #ffffff;
+}
+
+.cursor-pointer {
+    cursor: pointer;
 }

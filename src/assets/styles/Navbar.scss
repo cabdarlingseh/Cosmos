@@ -1,0 +1,39 @@
+.navbar-custom {
+    background-color: rgba(0, 0, 0, 0.8);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    font-family: Kanit;
+}
+
+.navbar-custom .nav-link {
+    color: #d00000;
+    transition: color 0.3s ease;
+}
+
+.navbar-custom .nav-link:hover {
+    color: #00d4ff;
+}
+
+.navbar-custom .nav-link.active {
+    color: #00d4ff;
+    font-weight: bold;
+    border-bottom: 2px solid #00d4ff;
+}
+
+.navbar-custom .dropdown-menu {
+    background-color: #1a1a2e;
+    border: none;
+}
+
+.navbar-custom .dropdown-item {
+    color: #ffffff;
+}
+
+.navbar-custom .dropdown-item:hover {
+    background-color: #2a2a4e;
+    color: #00d4ff;
+}
+
+.navbar-custom .btn-outline-light:hover {
+    background-color: #00d4ff;
+    color: #1a1a2e;
+}
