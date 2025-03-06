@@ -3,16 +3,15 @@ import { Container, Row, Col } from 'react-bootstrap';
 import LaunchCardInfo from '../components/LaunchCardInfo';
 import ExploreUniverse from '../components/ExploreUniverse';
 import PictureOfTheDay from '../components/PictureOfTheDay';
-import SpaceData from '../hooks/DataFetcher';
+import useSpaceData from '../hooks/UseDataFetcher';
 import Lottie from "lottie-react";
 import Loading_icon from '../assets/images/loading.json';
 import Error_icon from '../assets/images/error_info.json';
 import '../assets/styles/Dashboard.scss';
-import { div } from 'framer-motion/client';
 
 export default function Dashboard() {
 
-    const { launches, picture, loading, error } = SpaceData();
+    const { launches = [], picture, loading, error } = useSpaceData();
 
 
     // Loading  State
@@ -43,7 +42,7 @@ export default function Dashboard() {
                     className="error_icon"
                     aria-label='Error animation' />
 
-                <p className='mt-3'>Opps! Something went wrong. Please try again later.</p>
+                <p className='mt-3'>Opps! Something went wrong:{error}</p>
             </Container>
         );
     }
@@ -66,7 +65,7 @@ export default function Dashboard() {
                 <Col md={6}>
                     <h2 className='mb-4'>Astronomy picture of the day</h2>
                     <PictureOfTheDay picture={picture} />
-                    <h2 className='mt-5 mb-4'>Explorer of the Universe</h2>
+                    <h2 className='mt-5 mb-4'>Explore of the Universe</h2>
                     <ExploreUniverse />
                 </Col>
             </Row>

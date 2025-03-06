@@ -3,7 +3,7 @@ import axios from 'axios';
 
 const nasa_API = 'sjYX75buPFbu82hp7QafJqBqTypxLttZRibp38d6';
 
-export default function DataFetcher() {
+export default function UseDataFetcher() {
 
     const [launches, setLaunches] = useState([]);
     const [picture, setPicture] = useState(null);
