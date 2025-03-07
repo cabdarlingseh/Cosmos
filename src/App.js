@@ -6,7 +6,6 @@ import Navbar from './components/Navbar';
 import MainDashBoard from "./Pages/MainDashBoard";
 import Dashboard from './Pages/Dashboard';
 import NotFound from './components/NotFound';
-console.log('Dashboard import:', Dashboard);
 
 function App() {
   return (

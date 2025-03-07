@@ -2,10 +2,16 @@ import React, { useState } from "react";
 import { Navbar as BootstrapNavbar, Nav, Dropdown, Button } from 'react-bootstrap';
 import { NavLink } from "react-router-dom";
 import { FaRocket, FaMoon, FaSun } from "react-icons/fa";
+import FeedbackModal from '../components/FeedbackModal';
 import '../assets/styles/Navbar.scss';
 
 export default function Navbar() {
+
     const [theme, setTheme] = useState('dark');
+    const [showFeedbackModal, setShowFeedbackModal] = useState(false);
+
+
+    // Theme changer
 
     const themeToggle = (selectedTheme) => {
         document.body.classList.remove(`theme-${theme}`);
@@ -57,11 +63,24 @@ export default function Navbar() {
                         </Dropdown.Menu>
                     </Dropdown>
 
-                    <Button variant="outline-light" className="ms-3" aria-label="Notify me">
-                        Notify Me
+                    <Button
+                        variant="outline-light"
+                        className="ms-3"
+                        aria-label="Submit Feedback"
+                        onClick={() => setShowFeedbackModal(true)}
+                    >
+                        Submit Feedback
                     </Button>
+
                 </Nav>
+
             </BootstrapNavbar.Collapse>
+
+            <FeedbackModal
+                show={showFeedbackModal}
+                onHide={() => setShowFeedbackModal(false)}
+            />
+
         </BootstrapNavbar>
     );
 }

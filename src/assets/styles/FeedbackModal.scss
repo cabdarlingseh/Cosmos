@@ -1,0 +1,52 @@
+.modal-content {
+    background-color: #1a1a2e;
+    color: #fff;
+}
+
+.modal-header {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.modal-body {
+    .form-control {
+        background-color: #2a2a4e;
+        border: 1px solid #00d4ff;
+        color: #ffffff;
+
+        &::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        &:focus {
+            background-color: #2a2a4e;
+            border-color: #00d4ff;
+            box-shadow: 0 0 5px rgba(0, 212, 255, 0.5);
+        }
+    }
+
+    .feedback-result {
+        text-align: center;
+
+        .success-animation,
+        .failure-animation {
+            max-width: 200px;
+            margin: 0 auto;
+        }
+    }
+}
+
+.feedback_submit_button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    .btn-danger {
+        background-color: #ff4500;
+        border: none;
+
+        &:hover {
+            background-color: #ff6347;
+        }
+    }
+}
