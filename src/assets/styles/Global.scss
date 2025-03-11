@@ -1,13 +1,3 @@
-body.theme-dark {
-    background: linear-gradient(135deg, #1a1a2e, #16213e);
-    color: #ffdfdf;
-}
-
-body.theme-mars {
-    background: linear-gradient(135deg, #ff4500, #8b0000);
-    color: #181313;
-}
-
 body {
     margin: 0;
     padding: 0;
@@ -16,6 +6,16 @@ body {
         "DM Sans",
         sans-serif;
     ;
+}
+
+body.theme-dark {
+    background: linear-gradient(135deg, #1a1a2e, #16213e);
+    color: #ffdfdf !important;
+}
+
+body.theme-mars {
+    background: linear-gradient(135deg, #ff4500, #8b0000);
+    color: #181313 !important;
 }
 
 .card {

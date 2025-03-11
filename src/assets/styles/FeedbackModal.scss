@@ -7,6 +7,13 @@
     border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 }
 
+.modal-header.close_button_position {
+    .btn-close {
+        position: relative;
+        top: -15px;
+    }
+}
+
 .modal-body {
     .form-control {
         background-color: #2a2a4e;

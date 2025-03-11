@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Navbar as BootstrapNavbar, Nav, Dropdown, Button } from 'react-bootstrap';
 import { NavLink } from "react-router-dom";
 import { FaRocket, FaMoon, FaSun } from "react-icons/fa";
@@ -7,20 +7,27 @@ import '../assets/styles/Navbar.scss';
 
 export default function Navbar() {
 
-    const [theme, setTheme] = useState('dark');
+    const [theme, setTheme] = useState(() => {
+        return localStorage.getItem('theme') || 'dark';
+    });
     const [showFeedbackModal, setShowFeedbackModal] = useState(false);
 
 
     // Theme changer
 
+    useEffect(() => {
+        document.body.classList.add(`theme-${theme}`)
+    }, [theme]);
+
     const themeToggle = (selectedTheme) => {
         document.body.classList.remove(`theme-${theme}`);
         setTheme(selectedTheme);
         document.body.classList.add(`theme-${selectedTheme}`);
+        localStorage.setItem('theme', selectedTheme);
     };
 
     return (
-        <BootstrapNavbar expand="lg" variant="dark" className="navbar-custom py-3">
+        <BootstrapNavbar expand="lg" variant="dark" className="navbar-custom py-3 fixed-top">
 
             <BootstrapNavbar.Brand as={NavLink} to="/" className="d-flex align-items-center ms-3">
                 <FaRocket className="me-2" />

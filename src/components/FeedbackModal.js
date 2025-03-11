@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Modal, Form, Button } from "react-bootstrap";
+import React, { useEffect, useState } from "react";
+import { Modal, Form } from "react-bootstrap";
 import axios from "axios";
 import '../assets/styles/FeedbackModal.scss';
 import Lottie from "lottie-react";
@@ -18,12 +18,25 @@ export default function FeedbackModal({ show, onHide }) {
     const [submitted, setSubmitted] = useState(false);
     const [errorOccured, setErrorOccured] = useState(false);
 
+    useEffect(() => {
+        if (show) {
+            setFeedback({
+                name: '',
+                email: '',
+                message: ''
+            });
+            setSubmitted(false);
+            setErrorOccured(false);
+        }
+    }, [show])
+
     //Form Changes
 
     const handleInputChange = (event) => {
         const { name, value } = event.target;
         setFeedback((prev) => ({
-            ...prev, [name]: value
+            ...prev,
+            [name]: value
         }));
     }
 
@@ -71,7 +84,7 @@ export default function FeedbackModal({ show, onHide }) {
             centered
             className="text-white"
         >
-            <Modal.Header closeButton className="bg-dark border-0">
+            <Modal.Header closeButton className="bg-dark border-0 close_button_position">
 
                 <Modal.Title>Send Feedback</Modal.Title>
 

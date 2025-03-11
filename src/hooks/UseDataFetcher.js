@@ -18,6 +18,7 @@ export default function UseDataFetcher() {
                 const pictureData = await axios.get(`https://api.nasa.gov/planetary/apod?api_key=${nasa_API}`);
 
                 setLaunches(launchesData.data.results);
+                console.log(setLaunches(launchesData.data.results))
                 setPicture(pictureData.data);
             }
             catch (error) {

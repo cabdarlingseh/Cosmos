@@ -42,17 +42,17 @@ export default function Dashboard() {
                     className="error_icon"
                     aria-label='Error animation' />
 
-                <p className='mt-3'>Opps! Something went wrong:{error}</p>
+                <p className='mt-3 error_message'>Opps! Something went wrong:{error}</p>
             </Container>
         );
     }
 
     return (
-        <Container fluid className='py-4'>
+        <Container fluid className='py-4 dashboard-container'>
             <Row>
 
                 <Col md={6}>
-                    <h2 className='mb-4'>Upcoming Launches</h2>
+                    <h2 className='mb-4 upcoming_launch'>Upcoming Launches</h2>
                     {launches.length > 0 ? (
                         launches.slice(0, 10).map((launch) => (
                             <LaunchCardInfo key={launch.id} launch={launch} />
@@ -65,7 +65,7 @@ export default function Dashboard() {
                 <Col md={6}>
                     <h2 className='mb-4'>Astronomy picture of the day</h2>
                     <PictureOfTheDay picture={picture} />
-                    <h2 className='mt-5 mb-4'>Explore of the Universe</h2>
+                    <h2 className='mt-5 mb-4'>Explore the Universe</h2>
                     <ExploreUniverse />
                 </Col>
             </Row>
