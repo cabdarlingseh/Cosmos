@@ -163,6 +163,10 @@
     }
 }
 
+.modal.show .modal-dialog {
+    margin: 0 auto !important;
+}
+
 
 .card-title.trimmed_heading {
     display: -webkit-box;

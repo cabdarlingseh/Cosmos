@@ -48,13 +48,13 @@ export default function Dashboard() {
     }
 
     return (
-        <Container fluid className='py-4 dashboard-container'>
+        <Container fluid className='py-5 dashboard-container'>
             <Row>
 
                 <Col md={6}>
-                    <h2 className='mb-4 upcoming_launch'>Upcoming Launches</h2>
+                    <h2 className='mb-4 main_heading'>Upcoming Launches</h2>
                     {launches.length > 0 ? (
-                        launches.slice(0, 10).map((launch) => (
+                        launches.slice(0, 5).map((launch) => (
                             <LaunchCardInfo key={launch.id} launch={launch} />
                         ))
                     ) : (
@@ -63,9 +63,9 @@ export default function Dashboard() {
                 </Col>
 
                 <Col md={6}>
-                    <h2 className='mb-4'>Astronomy picture of the day</h2>
-                    <PictureOfTheDay picture={picture} />
-                    <h2 className='mt-5 mb-4'>Explore the Universe</h2>
+                    <h2 className='mb-4 main_heading'>Astronomy picture of the day</h2>
+                    <PictureOfTheDay picture={picture} loading={loading} error={error} />
+                    <h2 className='mb-4 main_heading'>Explore the Universe</h2>
                     <ExploreUniverse />
                 </Col>
             </Row>
