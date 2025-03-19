@@ -3,10 +3,9 @@ import axios from 'axios';
 
 const nasa_API = process.env.REACT_APP_NASA_API_KEY || 'sjYX75buPFbu82hp7QafJqBqTypxLttZRibp38d6';
 
-export default function UseDataFetcher() {
+function useDataFetcher(url, initialData = null) {
 
-    const [launches, setLaunches] = useState([]);
-    const [picture, setPicture] = useState(null);
+    const [data, setData] = useState(initialData);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
 
@@ -14,24 +13,43 @@ export default function UseDataFetcher() {
         const fetchData = async () => {
             setLoading(true);
             try {
-                const launchesData = await axios.get('https://ll.thespacedevs.com/2.0.0/launch/upcoming/');
-                const pictureData = await axios.get(
-                    `https://api.nasa.gov/planetary/apod?api_key=${nasa_API}`
-                );
-
-                setLaunches(launchesData.data.results);
-                // console.log(setLaunches(launchesData.data.results))
-                setPicture(pictureData.data);
+                const response = await axios.get(url);
+                setData(response.data);
             }
             catch (error) {
-                setError(error.message);
+                if (error.response?.data?.msg === "API_KEY_INVALID") {
+                    setError("Invalid NASA API key. Please get a valid key from https://api.nasa.gov.");
+                }
+                else {
+                    setError(error.message || "An error occurred while fetching data.");
+                }
             }
             finally {
                 setLoading(false);
             }
         };
-        fetchData()
-    }, []);
+        fetchData();
+    }, [url]);
 
-    return { launches, picture, loading, error };
+    return { data, loading, error };
 }
+
+export default function useDashboardData() {
+    const launches = useDataFetcher("https://ll.thespacedevs.com/2.0.0/launch/upcoming/");
+    const picture = useDataFetcher(`https://api.nasa.gov/planetary/apod?api_key=${nasa_API}`);
+    const trivia = useDataFetcher("https://ll.thespacedevs.com/2.0.0/launch/upcoming/?search=SpaceX&limit=5", { results: [] });
+    console.log(trivia);
+
+    return {
+        launches: launches.data?.results || [],
+        launchesLoading: launches.loading,
+        launchesError: launches.error,
+        picture: picture.data,
+        pictureLoading: picture.loading,
+        pictureError: picture.error,
+        trivia: trivia.data?.results || [],
+        triviaLoading: trivia.loading,
+        triviaError: trivia.error,
+    };
+}
+

@@ -51,6 +51,13 @@ export default function Navbar() {
                     >
                         Dashboard
                     </NavLink>
+
+                    <NavLink
+                        to="/starchart"
+                        className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}
+                    >
+                        Star Chart
+                    </NavLink>
                 </Nav>
 
                 <Nav className="ms-auto me-3">
