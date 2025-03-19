@@ -2,7 +2,7 @@ import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import useDashboardData from '../hooks/UseDataFetcher';
 import LaunchCardInfo from '../components/LaunchCardInfo';
-import ExploreUniverse from '../components/ExploreUniverse';
+// import ExploreUniverse from '../components/ExploreUniverse';
 import PictureOfTheDay from '../components/PictureOfTheDay';
 import Lottie from "lottie-react";
 import Loading_icon from '../assets/images/loading.json';
@@ -23,11 +23,10 @@ export default function Dashboard() {
         triviaError,
     } = useDashboardData();
 
-    const isLoading = launchesLoading || pictureLoading || triviaLoading;
-    const hasError = launchesError || pictureError || triviaError;
-    const errorMessage = launchesError || pictureError || triviaError;
+    const isLoading = launchesLoading || pictureLoading;
+    // const hasError = launchesError || pictureError || triviaError;
+    // const errorMessage = launchesError || pictureError || triviaError;
 
-    console.log("Trivia:", trivia);
     // Loading  State
 
     if (isLoading) {
@@ -47,7 +46,7 @@ export default function Dashboard() {
 
     //Error State
 
-    if (hasError) {
+    if (launchesError && pictureError) {
         return (
             <Container className='text-center py-5'>
                 <Lottie
@@ -56,7 +55,7 @@ export default function Dashboard() {
                     className="error_icon"
                     aria-label='Error animation' />
 
-                <p className='mt-3 error_message'>Opps! Something went wrong:{errorMessage}</p>
+                <p className='mt-3 error_message'>Opps! Something went wrong:{launchesError || pictureError}</p>
             </Container>
         );
     }
@@ -65,32 +64,39 @@ export default function Dashboard() {
         <Container fluid className='py-5 content-container'>
             <Row>
 
-                <Col md={6}>
-                    <h2 className='mb-4 main_heading'>Upcoming Launches</h2>
-                    {launches.length > 0 ? (
-                        launches.slice(0, 5).map((launch) => (
-                            <LaunchCardInfo key={launch.id} launch={launch} />
-                        ))
-                    ) : (
-                        <p>No upcoming launches found.</p>
+                {!launchesError && (
+                    <Col md={6}>
+                        <h2 className='mb-4 main_heading'>Upcoming Launches</h2>
+                        {launches?.length > 0 ? (
+                            launches.slice(0, 5).map((launch) => (
+                                <LaunchCardInfo key={launch.id} launch={launch} />
+                            ))
+                        ) : (
+                            <p>No upcoming launches found.</p>
+                        )}
+                    </Col>
+                )}
+
+                <Col md={launchesError ? 12 : 6}>
+                    {!pictureError && (
+                        <>
+                            <h2 className='mb-4 main_heading'>Astronomy Picture of the Day</h2>
+                            <PictureOfTheDay
+                                picture={picture}
+                                loading={pictureLoading}
+                                error={pictureError}
+                                fullWidth={launchesError}
+                            />
+                        </>
                     )}
-                </Col>
 
-                <Col md={6}>
-                    <h2 className='mb-4 main_heading'>Astronomy picture of the day</h2>
-                    <PictureOfTheDay
-                        picture={picture}
-                        loading={pictureLoading}
-                        error={pictureError}
-                    />
-
-                    <h2 className='mb-4 main_heading'>Explore the Universe</h2>
+                    {/* <h2 className='mb-4 main_heading'>Explore the Universe</h2>
 
                     <ExploreUniverse
                         trivia={trivia}
                         loading={triviaLoading}
                         error={triviaError}
-                    />
+                    /> */}
                 </Col>
             </Row>
         </Container>

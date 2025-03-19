@@ -100,19 +100,28 @@ export default function StarChartModal() {
         return (
             <Container className="text-center content-container">
                 <p className="mt-3 error_message">{error}</p>
+                <div className="button-group mt-3">
+                    <Button
+                        variant="primary"
+                        onClick={retrySubmit}
+                        className="me-2"
+                    >
+                        Try Again
+                    </Button>
+                    <Button
+                        variant="secondary"
+                        onClick={resetForm}
+                    >
+                        Go Back and Edit
+                    </Button>
+                </div>
                 <Lottie
                     animationData={Error_icon}
                     loop={false}
                     className="error_icon"
                     aria-label="Error animation"
                 />
-                <Button
-                    variant="primary"
-                    onClick={timedOut ? retrySubmit : resetForm}
-                    className="mt-3"
-                >
-                    {timedOut ? 'Try Again' : 'Go Back and Edit'}
-                </Button>
+
             </Container>
         );
     }

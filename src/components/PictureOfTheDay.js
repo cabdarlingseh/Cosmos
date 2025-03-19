@@ -6,7 +6,7 @@ import ErrorAnimation from '../assets/images/error_info.json';
 import '../assets/styles/PictureOfTheDay.scss';
 
 
-export default function PictureOfTheDay({ picture, loading, error }) {
+export default function PictureOfTheDay({ picture, loading, error, fullWidth }) {
 
     const [isFullscreen, setIsFullscreen] = useState(false);
 
@@ -65,7 +65,7 @@ export default function PictureOfTheDay({ picture, loading, error }) {
     }
 
     return (
-        <div className="apod-container" onClick={handleBackdropClick}>
+        <div className={`apod-container ${fullWidth ? 'full-width' : ''}`} onClick={handleBackdropClick}>
 
             <Card
                 className={`apod-card ${isFullscreen ? "fullscreen" : ""}`}

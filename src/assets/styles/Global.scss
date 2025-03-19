@@ -8,6 +8,10 @@ body {
     ;
 }
 
+body.theme-dark {
+    background: linear-gradient(135deg, #1a1a2e, #16213e);
+    color: #ffdfdf !important;
+}
 
 body.theme-mars {
     background: linear-gradient(135deg, #ff4500, #8b0000);
