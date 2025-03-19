@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Navbar as BootstrapNavbar, Nav, Dropdown, Button } from 'react-bootstrap';
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate, useLocation } from "react-router-dom";
 import { FaRocket, FaMoon, FaSun } from "react-icons/fa";
 import FeedbackModal from '../components/FeedbackModal';
 import '../assets/styles/Navbar.scss';
@@ -10,22 +10,30 @@ export default function Navbar() {
     const [theme, setTheme] = useState(() => {
         return localStorage.getItem('theme') || 'dark';
     });
+
     const [showFeedbackModal, setShowFeedbackModal] = useState(false);
     const [expanded, setExpanded] = useState(false);
     const navigate = useNavigate();
+    const location = useLocation();
 
 
     // Theme changer
 
     useEffect(() => {
-        document.body.classList.add(`theme-${theme}`)
-    }, [theme]);
+        document.body.classList.remove('theme-dark', 'theme-mars', 'theme-starchart');
+        if (location.pathname === '/starchart') {
+            document.body.classList.add('theme-starchart');
+        } else {
+            document.body.classList.add(`theme-${theme}`);
+        }
+    }, [theme, location.pathname]);
 
     const themeToggle = (selectedTheme) => {
         document.body.classList.remove(`theme-${theme}`);
         setTheme(selectedTheme);
         document.body.classList.add(`theme-${selectedTheme}`);
         localStorage.setItem('theme', selectedTheme);
+        setExpanded(false);
     };
 
     const handleToggle = () => {
@@ -34,6 +42,11 @@ export default function Navbar() {
 
 
     const handleNavLinkClick = () => {
+        setExpanded(false);
+    };
+
+    const handleFeedbackClick = () => {
+        setShowFeedbackModal(true);
         setExpanded(false);
     };
 
@@ -67,7 +80,7 @@ export default function Navbar() {
 
                     <NavLink
                         to="/starchart"
-                        className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}
+                        className={window.location.pathname === '/starchart' ? 'nav-link active' : 'nav-link'}
                         onClick={handleNavLinkClick}
                     >
                         Star Chart
@@ -95,7 +108,7 @@ export default function Navbar() {
                         variant="outline-light"
                         className="ms-3"
                         aria-label="Submit Feedback"
-                        onClick={() => setShowFeedbackModal(true)}
+                        onClick={handleFeedbackClick}
                     >
                         Submit Feedback
                     </Button>

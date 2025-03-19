@@ -74,6 +74,20 @@
     z-index: 1;
 }
 
+.star-chart-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    .text-muted {
+        color: #ff4444 !important;
+    }
+
+    .end-button {
+        margin-bottom: 10px;
+    }
+}
+
 // Media Queries
 
 @include media-breakpoint-down(sm) {

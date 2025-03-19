@@ -7,7 +7,7 @@ import Error_icon from '../assets/images/error_info.json';
 import constellations from '../data/constellations.json';
 import '../assets/styles/Pages.scss';
 
-export default function StarChartModal({ show, onHide }) {
+export default function StarChartModal() {
 
     const [latitude, setLatitude] = useState('');
     const [longitude, setLongitude] = useState('');
@@ -151,7 +151,7 @@ export default function StarChartModal({ show, onHide }) {
     return (
         <Container className="content-container star-chart-form">
             <h1 className="main_heading mb-4">Create a Star Chart</h1>
-            <Form onSubmit={handleSubmit}>
+            <Form onSubmit={handleSubmit} className="star-chart-form">
                 <Form.Group className="mb-3" controlId="latitude">
                     <Form.Label>Latitude (-90 to 90)</Form.Label>
                     <Form.Control
@@ -220,7 +220,7 @@ export default function StarChartModal({ show, onHide }) {
                     </Form.Text>
                 </Form.Group>
 
-                <Button variant="primary" type="submit" disabled={loading}>
+                <Button variant="primary" type="submit" disabled={loading} className="end-button">
                     {loading ? <Spinner size="sm" animation="border" /> : 'Generate Star Chart'}
                 </Button>
             </Form>
