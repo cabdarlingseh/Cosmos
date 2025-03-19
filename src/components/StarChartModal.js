@@ -84,13 +84,13 @@ export default function StarChartModal({ show, onHide }) {
     if (loading) {
         return (
             <Container className="text-center content-container">
+                <p className="mt-3">Generating Star Chart...</p>
                 <Lottie
                     animationData={Loading_icon}
                     loop={true}
                     className="loading_icon"
                     aria-label="Loading animation"
                 />
-                <p className="mt-3">Generating Star Chart...</p>
             </Container>
         );
     }
@@ -99,13 +99,13 @@ export default function StarChartModal({ show, onHide }) {
     if (error) {
         return (
             <Container className="text-center content-container">
+                <p className="mt-3 error_message">{error}</p>
                 <Lottie
                     animationData={Error_icon}
                     loop={false}
                     className="error_icon"
                     aria-label="Error animation"
                 />
-                <p className="mt-3 error_message">{error}</p>
                 <Button
                     variant="primary"
                     onClick={timedOut ? retrySubmit : resetForm}
@@ -149,7 +149,7 @@ export default function StarChartModal({ show, onHide }) {
 
     // Form State
     return (
-        <Container className="content-container">
+        <Container className="content-container star-chart-form">
             <h1 className="main_heading mb-4">Create a Star Chart</h1>
             <Form onSubmit={handleSubmit}>
                 <Form.Group className="mb-3" controlId="latitude">

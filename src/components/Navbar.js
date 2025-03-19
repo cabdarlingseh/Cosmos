@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Navbar as BootstrapNavbar, Nav, Dropdown, Button } from 'react-bootstrap';
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { FaRocket, FaMoon, FaSun } from "react-icons/fa";
 import FeedbackModal from '../components/FeedbackModal';
 import '../assets/styles/Navbar.scss';
@@ -11,6 +11,8 @@ export default function Navbar() {
         return localStorage.getItem('theme') || 'dark';
     });
     const [showFeedbackModal, setShowFeedbackModal] = useState(false);
+    const [expanded, setExpanded] = useState(false);
+    const navigate = useNavigate();
 
 
     // Theme changer
@@ -26,8 +28,17 @@ export default function Navbar() {
         localStorage.setItem('theme', selectedTheme);
     };
 
+    const handleToggle = () => {
+        setExpanded(!expanded);
+    };
+
+
+    const handleNavLinkClick = () => {
+        setExpanded(false);
+    };
+
     return (
-        <BootstrapNavbar expand="lg" variant="dark" className="navbar-custom py-3 fixed-top">
+        <BootstrapNavbar expand="lg" variant="dark" className="navbar-custom py-3 fixed-top" expanded={expanded} onToggle={handleToggle}>
 
             <BootstrapNavbar.Brand as={NavLink} to="/" className="d-flex align-items-center ms-3">
                 <FaRocket className="me-2" />
@@ -41,6 +52,7 @@ export default function Navbar() {
                     <NavLink
                         to="/"
                         className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}
+                        onClick={handleNavLinkClick}
                     >
                         Home
                     </NavLink>
@@ -48,6 +60,7 @@ export default function Navbar() {
                     <NavLink
                         to="/dashboard"
                         className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}
+                        onClick={handleNavLinkClick}
                     >
                         Dashboard
                     </NavLink>
@@ -55,6 +68,7 @@ export default function Navbar() {
                     <NavLink
                         to="/starchart"
                         className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}
+                        onClick={handleNavLinkClick}
                     >
                         Star Chart
                     </NavLink>
