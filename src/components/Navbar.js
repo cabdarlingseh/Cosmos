@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Navbar as BootstrapNavbar, Nav, Dropdown, Button } from 'react-bootstrap';
-import { NavLink, useNavigate, useLocation } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import { FaRocket, FaMoon, FaSun } from "react-icons/fa";
 import FeedbackModal from '../components/FeedbackModal';
 import '../assets/styles/Navbar.scss';
@@ -13,7 +13,6 @@ export default function Navbar() {
 
     const [showFeedbackModal, setShowFeedbackModal] = useState(false);
     const [expanded, setExpanded] = useState(false);
-    const navigate = useNavigate();
     const location = useLocation();
 
 
@@ -71,11 +70,15 @@ export default function Navbar() {
                     </NavLink>
 
                     <NavLink
-                        to="/dashboard"
+                        to="/rockets"
                         className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}
                         onClick={handleNavLinkClick}
                     >
-                        Dashboard
+                        Rockets
+                    </NavLink>
+
+                    <NavLink to="/gallery" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`} onClick={handleNavLinkClick}>
+                        Gallery
                     </NavLink>
 
                     <NavLink

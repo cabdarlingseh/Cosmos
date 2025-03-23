@@ -37,8 +37,6 @@ function useDataFetcher(url, initialData = null) {
 export default function useDashboardData() {
     const launches = useDataFetcher("https://ll.thespacedevs.com/2.0.0/launch/upcoming/");
     const picture = useDataFetcher(`https://api.nasa.gov/planetary/apod?api_key=${nasa_API}`);
-    const trivia = useDataFetcher("https://ll.thespacedevs.com/2.0.0/launch/upcoming/?search=SpaceX&limit=5", { results: [] });
-    console.log(trivia);
 
     return {
         launches: launches.data?.results || [],
@@ -47,9 +45,6 @@ export default function useDashboardData() {
         picture: picture.data,
         pictureLoading: picture.loading,
         pictureError: picture.error,
-        trivia: trivia.data?.results || [],
-        triviaLoading: trivia.loading,
-        triviaError: trivia.error,
     };
 }
 

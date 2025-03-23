@@ -2,7 +2,6 @@
 @import "~bootstrap/scss/variables";
 @import "~bootstrap/scss/mixins";
 
-
 .apod-container {
     display: flex;
     flex-direction: column;
@@ -12,8 +11,7 @@
     background: rgba(255, 255, 255, 0.05);
     border: none;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    transition: transform 0.2s ease,
-        box-shadow 0.2s ease;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 
     &.full-width {
         width: 100%;
@@ -131,13 +129,50 @@
             font-size: 1.25rem;
             color: #d00000 !important;
         }
-
     }
 }
 
+.space-art-gallery {
+    padding: 20px 0;
+
+    .carousel {
+        max-width: 100%;
+        margin: 0 auto;
+
+        .carousel-image {
+            object-fit: cover;
+            border-radius: 8px;
+            margin: 0 auto;
+            width: 75% !important;
+            height: 75% !important;
+        }
+
+        .carousel-caption {
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 4px;
+            padding: 10px 15px;
+
+            h3 {
+                font-size: 1.5rem;
+                font-weight: 600;
+                color: #ffffff;
+                margin-bottom: 5px;
+            }
+
+            p {
+                font-size: 1rem;
+                color: #cccccc;
+                margin: 0;
+            }
+        }
+    }
+}
+
+.space-art {
+    margin-top: 20px;
+}
+
 // Media Queries
-
-
 @include media-breakpoint-down(sm) {
     .apod-container {
         min-height: 200px;
@@ -160,7 +195,20 @@
             font-size: 0.875rem;
         }
     }
+
+    .space-art-gallery {
+        .carousel.carousel-caption {
+            h3 {
+                font-size: 1.25rem;
+            }
+
+            p {
+                font-size: 0.9rem;
+            }
+        }
+    }
 }
+
 
 @include media-breakpoint-between(sm, md) {
     .apod-container {

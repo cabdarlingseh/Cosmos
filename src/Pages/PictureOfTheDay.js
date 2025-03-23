@@ -3,7 +3,7 @@ import { Card } from 'react-bootstrap';
 import Lottie from "lottie-react";
 import LoadingAnimation from '../assets/images/loading.json';
 import ErrorAnimation from '../assets/images/error_info.json';
-import '../assets/styles/PictureOfTheDay.scss';
+import '../assets/styles/Gallery.scss';
 
 
 export default function PictureOfTheDay({ picture, loading, error, fullWidth }) {
@@ -84,7 +84,6 @@ export default function PictureOfTheDay({ picture, loading, error, fullWidth }) 
                             <iframe
                                 src={picture.url}
                                 title={picture.title}
-                                frameBorder='0'
                                 allowFullScreen
                                 className="apod-iframe"
                             />

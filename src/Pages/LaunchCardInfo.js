@@ -80,7 +80,7 @@ export default function LaunchCardInfo({ launch }) {
                     )}
                     <Button
                         variant={notificationSet ? 'success' : 'primary'}
-                        onClick={(e) => { e.stopPropagation(); handleNotifyMeClick(); }} // Prevent card click
+                        onClick={(e) => { e.stopPropagation(); handleNotifyMeClick(); }}
                         disabled={notificationSet || countdown === 'Launched'}
                         aria-label={notificationSet ? 'Notification scheduled' : 'Schedule launch notification'}
                     >
@@ -89,7 +89,7 @@ export default function LaunchCardInfo({ launch }) {
                 </Card.Body>
             </Card>
 
-            {/* Details Modal */}
+
             <Modal
                 show={showDetailsModal}
                 onHide={() => setShowDetailsModal(false)}

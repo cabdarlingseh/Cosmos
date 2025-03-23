@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { Container, Form, Button, Spinner } from "react-bootstrap";
 import axios from "axios";
 import Lottie from "lottie-react";
@@ -7,8 +7,9 @@ import Error_icon from '../assets/images/error_info.json';
 import constellations from '../data/constellations.json';
 import '../assets/styles/Pages.scss';
 
-export default function StarChartModal() {
+const TIMEOUT_DURATION = 10000;
 
+export default function StarChartModal() {
     const [latitude, setLatitude] = useState('');
     const [longitude, setLongitude] = useState('');
     const [date, setDate] = useState('');
@@ -17,14 +18,16 @@ export default function StarChartModal() {
     const [starChartUrl, setStarChartUrl] = useState(null);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
-    const [timedOut, setTimedOut] = useState(false);
+    const [constellationsInput, setConstellationsInput] = useState('');
+    const [constellationsSuggestions, setConstellationsSuggestions] = useState([]);
+    const [highlightedIndex, setHighlightedIndex] = useState(-1);
+    const suggestionsRef = useRef(null);
 
     const handleSubmit = async (event) => {
         event.preventDefault();
         setLoading(true);
         setError('');
         setStarChartUrl(null);
-        setTimedOut(false);
 
         const apiCall = {
             style: style,
@@ -45,16 +48,15 @@ export default function StarChartModal() {
                 apiCall,
                 {
                     headers: {
-                        'Authorization': 'Basic MjQ4M2YxZDAtZjMyZC00YWFlLThhMTgtMGU4MzlkYzMwNTIxOjZmMDI3NTlkMzY2NWRkYzE5MGVhYmFiMTIyYTg2ZTlkYTM2OTcyNTQ2NzI1ZmE0NTI4NTFhMjk2Njk0YTJjYWZmMGZlMzY3NWM1Nzk0MDdiZmJhMjE0ZTBjZTlhMDQwYTU1NDI3ZDU0NGZlNzMyNzc5NjVkMzRhZjlhZTIxZWIwYjFiOWVjNzFlOWI2YjY5OWUzM2Y0ZThkYmI4ZmVmMWVjZDg0NDJjYTJhYjkxMjk3NDg2YzJmZmYxZDFmMDMxMGUzZTAwNmY0ZGFhZWJmNWY5MzkwZjU2ZTlmYmZlZDRm',
+                        'Authorization': `Basic ${process.env.REACT_APP_API_KEY}`,
                         'Content-Type': 'application/json'
                     },
-                    timeout: 10000 // 10 seconds timeout
+                    timeout: TIMEOUT_DURATION
                 }
             );
             setStarChartUrl(response.data.data.imageUrl);
         } catch (err) {
             if (err.code === 'ECONNABORTED') {
-                setTimedOut(true);
                 setError('Request timed out. Please try again.');
             } else {
                 setError('Failed to generate star chart. Please check your inputs and try again.');
@@ -73,11 +75,60 @@ export default function StarChartModal() {
         setConstellation('');
         setStarChartUrl(null);
         setError('');
-        setTimedOut(false);
     };
 
     const retrySubmit = () => {
         handleSubmit({ preventDefault: () => { } });
+    };
+
+    const handleConstellationsInputChange = (e) => {
+        const value = e.target.value;
+        setConstellationsInput(value);
+
+        if (value) {
+            const filteredConstellations = constellations.filter(constellation =>
+                typeof constellation.name === 'string' &&
+                constellation.name.toLowerCase().startsWith(value.toLowerCase())
+            );
+            setConstellationsSuggestions(filteredConstellations.map(c => c.name));
+        } else {
+            setConstellationsSuggestions([]);
+        }
+        setHighlightedIndex(-1);
+    };
+
+    const handleKeyDown = (e) => {
+        if (constellationsSuggestions.length > 0) {
+            if (e.key === 'ArrowDown') {
+                e.preventDefault();
+                setHighlightedIndex((prevIndex) =>
+                    prevIndex < constellationsSuggestions.length - 1 ? prevIndex + 1 : 0
+                );
+            } else if (e.key === 'ArrowUp') {
+                e.preventDefault();
+                setHighlightedIndex((prevIndex) =>
+                    prevIndex > 0 ? prevIndex - 1 : constellationsSuggestions.length - 1
+                );
+            } else if (e.key === 'Enter' && highlightedIndex !== -1) {
+                e.preventDefault();
+                const selectedConstellation = constellationsSuggestions[highlightedIndex];
+                setConstellationsInput(selectedConstellation);
+                setConstellation(selectedConstellation);
+                setConstellationsSuggestions([]);
+            }
+        }
+    };
+
+    const handleSuggestionClick = (suggestion) => {
+        setConstellationsInput(suggestion);
+        setConstellation(suggestion);
+        setConstellationsSuggestions([]);
+    };
+
+    const handleInputBlur = () => {
+        setTimeout(() => {
+            setConstellationsSuggestions([]);
+        }, 200);
     };
 
     // Loading State
@@ -121,7 +172,6 @@ export default function StarChartModal() {
                     className="error_icon"
                     aria-label="Error animation"
                 />
-
             </Container>
         );
     }
@@ -170,8 +220,9 @@ export default function StarChartModal() {
                         max="90"
                         value={latitude}
                         onChange={(e) => setLatitude(e.target.value)}
-                        placeholder="e.g., 40.7128"
+                        placeholder="e.g., 33.775867"
                         required
+                        onClick={(e) => e.target.select()}
                     />
                 </Form.Group>
 
@@ -184,8 +235,9 @@ export default function StarChartModal() {
                         max="180"
                         value={longitude}
                         onChange={(e) => setLongitude(e.target.value)}
-                        placeholder="e.g., -74.0060"
+                        placeholder="e.g., -84.39733"
                         required
+                        onClick={(e) => e.target.select()}
                     />
                 </Form.Group>
 
@@ -196,6 +248,7 @@ export default function StarChartModal() {
                         value={date}
                         onChange={(e) => setDate(e.target.value)}
                         placeholder="Select a date"
+                        onClick={(e) => e.target.focus()}
                     />
                     <Form.Text className="text-muted">
                         Defaults to today if not specified
@@ -204,7 +257,7 @@ export default function StarChartModal() {
 
                 <Form.Group className="mb-3" controlId="style">
                     <Form.Label>Style</Form.Label>
-                    <Form.Select value={style} onChange={(e) => setStyle(e.target.value)}>
+                    <Form.Select value={style} onChange={(e) => setStyle(e.target.value)} onClick={(e) => e.target.focus()} >
                         <option value="default">Default</option>
                         <option value="navy">Navy</option>
                         <option value="red">Red</option>
@@ -212,18 +265,29 @@ export default function StarChartModal() {
                     </Form.Select>
                 </Form.Group>
 
-                <Form.Group className="mb-3" controlId="constellation">
+                <Form.Group className="mb-3 constellation-input-box" controlId="constellation">
                     <Form.Label>Constellation (Optional)</Form.Label>
-                    <Form.Select
-                        value={constellation}
-                        onChange={(e) => setConstellation(e.target.value)}
-                    >
-                        {constellations.map((c) => (
-                            <option key={c.code} value={c.code}>
-                                {c.name}
-                            </option>
-                        ))}
-                    </Form.Select>
+                    <Form.Control
+                        type="text"
+                        value={constellationsInput}
+                        onChange={handleConstellationsInputChange}
+                        onKeyDown={handleKeyDown}
+                        onBlur={handleInputBlur}
+                        placeholder="Type a constellation name..."
+                    />
+                    {constellationsSuggestions.length > 0 && (
+                        <ul className="suggestions-list" ref={suggestionsRef}>
+                            {constellationsSuggestions.map((suggestion, index) => (
+                                <li
+                                    key={index}
+                                    className={index === highlightedIndex ? 'highlighted' : ''}
+                                    onClick={() => handleSuggestionClick(suggestion)}
+                                >
+                                    {suggestion}
+                                </li>
+                            ))}
+                        </ul>
+                    )}
                     <Form.Text className="text-muted">
                         Select a constellation or "None" for a general area view
                     </Form.Text>

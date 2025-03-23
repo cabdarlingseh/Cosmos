@@ -90,6 +90,51 @@
     }
 }
 
+.constellation-input-box {
+    position: relative;
+
+    .suggestions-list {
+        width: 100%;
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+        border: 1px solid #ccc;
+        max-height: 150px;
+        overflow-y: auto;
+        position: absolute;
+        background: url('../images/constellations.jpg') no-repeat center center fixed;
+        background-size: cover;
+        z-index: 1000;
+    }
+
+    .suggestions-list li {
+        padding: 8px;
+        cursor: pointer;
+    }
+
+    .suggestions-list li:hover {
+        background-color: #f0f0f0;
+    }
+}
+
+.rocket-simulator-container {
+    background: url('../images/rocketlaunch.jpg') no-repeat center center fixed;
+    background-size: cover;
+    margin-top: 25px;
+    border-radius: 4px;
+
+    .rocket {
+        color: #ff4444;
+    }
+}
+
+.highlighted {
+    background-color: #007bff;
+    color: white;
+}
+
+
+
 // Media Queries
 
 @include media-breakpoint-down(sm) {

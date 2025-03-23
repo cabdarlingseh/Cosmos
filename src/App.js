@@ -4,21 +4,29 @@ import 'bootstrap/dist/css/bootstrap.css';
 import './assets/styles/Global.scss'
 import Navbar from './components/Navbar';
 import MainDashBoard from "./Pages/MainDashBoard";
-import Dashboard from './Pages/Dashboard';
-import Starchart from './components/StarChartModal';
+import Starchart from './Pages/StarChartModal';
 import NotFound from './components/NotFound';
+import Footer from './components/Footer';
+import AboutRockets from "./Pages/AboutRockets";
+import Gallery from "./Pages/Gallery";
 
 function App() {
   return (
     <div className="App theme-dark">
       <Router>
-        <Navbar />
-        <Routes>
-          <Route path="/" element={<MainDashBoard />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/starchart" element={<Starchart />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
+        <div className="d-flex flex-column min-vh-100">
+          <Navbar />
+          <main className="flex-grow-1">
+            <Routes>
+              <Route path="/" element={<MainDashBoard />} />
+              <Route path="/rockets" element={<AboutRockets />} />
+              <Route path="/gallery" element={<Gallery />} />
+              <Route path="/starchart" element={<Starchart />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </main>
+          <Footer />
+        </div>
       </Router>
     </div>
   );
