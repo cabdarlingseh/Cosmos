@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
-const nasa_API = process.env.REACT_APP_NASA_API_KEY || 'sjYX75buPFbu82hp7QafJqBqTypxLttZRibp38d6';
+export const nasa_API = process.env.REACT_APP_NASA_API_KEY || 'sjYX75buPFbu82hp7QafJqBqTypxLttZRibp38d6';
 
 function useDataFetcher(url, initialData = null) {
 

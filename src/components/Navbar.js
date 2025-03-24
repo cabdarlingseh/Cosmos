@@ -88,6 +88,14 @@ export default function Navbar() {
                     >
                         Star Chart
                     </NavLink>
+
+                    <NavLink
+                        to="/cosmic"
+                        className={window.location.pathname === '/cosmic' ? 'nav-link active' : 'nav-link'}
+                        onClick={handleNavLinkClick}
+                    >
+                        Cosmic Obeserver
+                    </NavLink>
                 </Nav>
 
                 <Nav className="ms-auto me-3">

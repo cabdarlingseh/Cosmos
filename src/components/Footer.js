@@ -43,6 +43,11 @@ export default function Footer() {
                                     Star Chart
                                 </NavLink>
                             </li>
+                            <li>
+                                <NavLink to="/cosmic" className="footer-link">
+                                    Cosmic Observer
+                                </NavLink>
+                            </li>
                         </ul>
                     </Col>
 
