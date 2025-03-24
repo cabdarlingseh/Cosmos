@@ -1,0 +1,193 @@
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+@import "~bootstrap/scss/mixins";
+
+.cosmic-observer {
+    .view-from-space {
+        .space-view-card.earth-card.card {
+            body.theme-dark & {
+                background: linear-gradient(135deg, #ff4500, #8b0000);
+            }
+
+            body.theme-dark.source p & {
+                color: #0f8d1e;
+            }
+
+            body.theme-mars & {
+                background: linear-gradient(135deg, #1a1a2e, #16213e);
+                color: #cccccc;
+            }
+
+            body.theme-mars.source p & {
+                color: #0f8d1e;
+            }
+        }
+
+
+        .space-view-card {
+            .earth-view {
+                height: 400px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin: 20px 0;
+                position: relative;
+
+                .earth-image {
+                    max-height: 100%;
+                    max-width: 100%;
+                    object-fit: contain;
+                    border-radius: 8px;
+                    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+                    cursor: pointer;
+                    transition: none;
+
+                    &.fullscreen {
+                        position: fixed;
+                        top: 0;
+                        left: 0;
+                        width: 100vw;
+                        height: 100vh;
+                        max-height: none;
+                        max-width: none;
+                        object-fit: contain;
+                        z-index: 2000;
+                        background: rgba(0, 0, 0, 0.9);
+                        border-radius: 0;
+                        box-shadow: none;
+                    }
+                }
+
+                .status-message {
+                    font-size: 1rem;
+                    color: #cccccc;
+
+                    @media (max-width: 767px) {
+                        font-size: 0.9rem;
+                    }
+                }
+            }
+        }
+    }
+
+    .space-news-container {
+        margin-top: 20px;
+        padding: 0 15px;
+
+        h2 {
+            font-size: 1.75rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+
+            @include media-breakpoint-down(sm) {
+                font-size: 1.5rem;
+            }
+
+            @include media-breakpoint-between(sm, md) {
+                font-size: 1.6rem;
+            }
+
+            @include media-breakpoint-up(lg) {
+                font-size: 1.75rem;
+            }
+        }
+    }
+
+    .news-card {
+        background: #2a2a4e;
+        border: none;
+        border-radius: 8px;
+        overflow: hidden;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+        max-width: 100%;
+        width: 700px;
+        margin: 0 auto;
+
+        &:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        body.theme-dark & {
+            background: linear-gradient(135deg, #ff4500, #8b0000);
+            color: #181313 !important;
+        }
+
+        .news-image {
+            object-fit: cover;
+            margin: 0 auto;
+            display: block;
+
+            @include media-breakpoint-down(sm) {
+                width: 100%;
+                max-height: 150px;
+            }
+
+            @include media-breakpoint-between(sm, md) {
+                max-height: 180px;
+            }
+        }
+
+        .card-body {
+            padding: 15px;
+
+            .card-title {
+                font-size: 1.25rem;
+                font-weight: 500;
+                margin-bottom: 10px;
+
+                @include media-breakpoint-down(sm) {
+                    font-size: 1.1rem;
+                }
+
+                @include media-breakpoint-between(sm, md) {
+                    font-size: 1.15rem;
+                }
+            }
+
+            .card-text {
+                font-size: 1rem;
+                line-height: 1.5;
+                margin-bottom: 10px;
+
+                small {
+                    font-size: 0.875rem;
+                    opacity: 0.8;
+
+                    @include media-breakpoint-down(sm) {
+                        font-size: 0.75rem;
+                    }
+                }
+            }
+
+            .text-muted {
+                font-size: 0.9rem;
+                margin-bottom: 10px;
+
+                @include media-breakpoint-down(sm) {
+                    font-size: 0.8rem;
+                }
+            }
+
+            .btn-outline-light {
+                font-size: 0.9rem;
+                padding: 5px 15px;
+
+                &:hover {
+                    background-color: rgba(255, 255, 255, 0.1);
+                }
+
+                @include media-breakpoint-down(sm) {
+                    font-size: 0.8rem;
+                    padding: 4px 12px;
+                }
+            }
+        }
+    }
+
+    @media (max-width: 767px) {
+        .view-from-space .space-view-card .earth-view {
+            height: 250px;
+        }
+    }
+}

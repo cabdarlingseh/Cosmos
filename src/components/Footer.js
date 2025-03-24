@@ -44,8 +44,8 @@ export default function Footer() {
                                 </NavLink>
                             </li>
                             <li>
-                                <NavLink to="/cosmic" className="footer-link">
-                                    Cosmic Observer
+                                <NavLink to="/explore" className="footer-link">
+                                    Explore
                                 </NavLink>
                             </li>
                         </ul>

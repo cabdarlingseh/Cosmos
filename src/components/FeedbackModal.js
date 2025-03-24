@@ -99,7 +99,7 @@ export default function FeedbackModal({ show, onHide }) {
                             animationData={SuccessAnimation}
                             loop={false}
                             className='success-animation'
-                            aria-labe='Success animation'
+                            aria-label='Success animation'
                         />
                         <p className="text-success">Thank you! Your feedback has been submitted.</p>
                     </div>

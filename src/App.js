@@ -9,7 +9,7 @@ import NotFound from './components/NotFound';
 import Footer from './components/Footer';
 import AboutRockets from "./Pages/AboutRockets";
 import Gallery from "./Pages/Gallery";
-import CosmicObserver from "./components/CosmicObeserver";
+import Explore from "./components/Explore";
 
 function App() {
   return (
@@ -23,7 +23,7 @@ function App() {
               <Route path="/rockets" element={<AboutRockets />} />
               <Route path="/gallery" element={<Gallery />} />
               <Route path="/starchart" element={<Starchart />} />
-              <Route path="/cosmic" element={<CosmicObserver />} />
+              <Route path="/explore" element={<Explore />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </main>

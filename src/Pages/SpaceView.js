@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Card } from "react-bootstrap";
-import "../assets/styles/Cosmic.scss";
+import "../assets/styles/Explore.scss";
 import EarthImage from "../assets/images/iss_earth.jpg";
 import { nasa_API } from "../hooks/UseDataFetcher";
 
@@ -26,8 +26,11 @@ export default function ViewFromSpace() {
                     `https://api.nasa.gov/EPIC/api/natural?api_key=${nasa_API}`,
                     { signal: controller.signal }
                 );
+
                 clearTimeout(timeout);
-                if (!response.ok) throw new Error("Failed to fetch EPIC data");
+
+                if (!response.ok) throw new Error("Failed to fetch data");
+
                 const data = await response.json();
                 const latestImage = data[0];
                 const date = new Date(latestImage.date);
@@ -38,10 +41,10 @@ export default function ViewFromSpace() {
                 setEarthImage(imageUrl);
                 setLoading(false);
             } catch (err) {
-                setError("Could not load Earth image from NASA EPIC API. Please retry again.");
+                setError("Could not load Earth image. Please retry again.");
                 setEarthImage(EarthImage);
                 setLoading(false);
-                console.error("EPIC API Error:", err);
+                console.error("API Error:", err);
             }
         };
 
@@ -51,15 +54,15 @@ export default function ViewFromSpace() {
             clearInterval(timeInterval);
         };
     }, []);
+
     const toggleFullscreen = () => {
         setIsFullscreen(!isFullscreen);
     };
 
     return (
         <div className="view-from-space">
-            <Card className="space-view-card">
+            <Card className="space-view-card earth-card">
                 <Card.Body>
-                    <Card.Title>View from Space</Card.Title>
                     <div className="earth-view">
                         {loading ? (
                             <div className="text-center">Loading Earth image...</div>

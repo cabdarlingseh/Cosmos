@@ -28,6 +28,14 @@ export default function AboutRockets() {
         );
     }
 
+    if (launchesError) {
+        return (
+            <Container className='text-center py-5'>
+                <p className='text-danger'>Failed to load upcoming launches. Please try again later.</p>
+            </Container>
+        );
+    }
+
     return (
         <Container fluid className='py-5 content-container'>
             <Row>

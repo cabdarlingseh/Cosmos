@@ -27,8 +27,6 @@ export default function NotifyMeModal({ show, onHide, launch, onScheduled }) {
                 userId: email
             });
 
-            //Notification from the browser
-
             if ("Notification" in window && Notification.permission === 'granted') {
                 setTimeout(() => {
                     new Notification(`Launch Alert: ${launch.name}`, {

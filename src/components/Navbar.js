@@ -90,11 +90,11 @@ export default function Navbar() {
                     </NavLink>
 
                     <NavLink
-                        to="/cosmic"
+                        to="/explore"
                         className={window.location.pathname === '/cosmic' ? 'nav-link active' : 'nav-link'}
                         onClick={handleNavLinkClick}
                     >
-                        Cosmic Obeserver
+                        Explore
                     </NavLink>
                 </Nav>
 

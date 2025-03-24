@@ -16,8 +16,7 @@ export default function SpaceArtGallery() {
     useEffect(() => {
         const fetchArtworks = async () => {
             if (!process.env.REACT_APP_PEXELS_API_KEY) {
-                console.error("Pexels API key is missing. Please set REACT_APP_PEXELS_API_KEY in your environment variables.");
-                setError("Pexels API key is missing. Please contact the administrator.");
+                console.error("Pexels API key is missing.");
                 setLoading(false);
                 return;
             }
@@ -29,13 +28,12 @@ export default function SpaceArtGallery() {
             try {
                 const response = await client.photos.search({
                     query: randomQuery,
-                    per_page: 6,
+                    per_page: 10,
                     page: randomPage,
                 });
                 const photos = response.photos.map(photo => ({
                     id: photo.id,
                     title: photo.alt || "Untitled Artwork",
-                    artist: photo.photographer || "Unknown Artist",
                     image: photo.src.large,
                 }));
                 setArtworks(photos);
@@ -96,10 +94,6 @@ export default function SpaceArtGallery() {
                             src={artwork.image}
                             alt={artwork.title || "Space artwork"}
                         />
-                        <Carousel.Caption className="custom-caption">
-                            <h3>{artwork.title}</h3>
-                            <p>by {artwork.artist}</p>
-                        </Carousel.Caption>
                     </Carousel.Item>
                 ))}
             </Carousel>

@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { Container, Row, Col, Button } from "react-bootstrap";
-import VirtualTelescope from "../Pages/VirtualTelescope";
 import ViewFromSpace from "../Pages/SpaceView";
-import "../assets/styles/Cosmic.scss";
+import News from '../Pages/SpaceNewsFeed';
+import "../assets/styles/Explore.scss";
 import Lottie from "lottie-react";
 import LoadingAnimation from '../assets/images/loading.json';
 import ErrorAnimation from '../assets/images/error_info.json';
 
 export default function CosmicObserver() {
     const componentsToRender = [
-        { Component: VirtualTelescope, name: "Virtual Telescope Viewer" },
         { Component: ViewFromSpace, name: "View from Space" },
+        { Component: News, name: "News" },
     ];
 
     const [pageStatus, setPageStatus] = useState("loading");
@@ -72,11 +72,6 @@ export default function CosmicObserver() {
 
     return (
         <Container fluid className="py-5 content-container cosmic-observer">
-            <Row>
-                <Col md={12}>
-                    <h1 className="main-heading mb-5 text-center">Cosmic Observer</h1>
-                </Col>
-            </Row>
             <Row>
                 {componentsToRender.map(({ Component, name }, index) => (
                     <Col md={12} className="mb-4" key={index}>

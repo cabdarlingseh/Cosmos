@@ -77,7 +77,7 @@ export default function RocketSimulator() {
                             value={fuel}
                             onChange={(value) => setFuel(value)}
                             renderThumb={(props, state) => {
-                                const { key, ...restProps } = props; // Extract the key property
+                                const { key, ...restProps } = props;
                                 return (
                                     <div key={key} {...restProps} className="custom-slider-thumb">
                                         {state.valueNow}
@@ -98,7 +98,7 @@ export default function RocketSimulator() {
                             value={angle}
                             onChange={(value) => setAngle(value)}
                             renderThumb={(props, state) => {
-                                const { key, ...restProps } = props; // Extract the key property
+                                const { key, ...restProps } = props;
                                 return (
                                     <div key={key} {...restProps} className="custom-slider-thumb">
                                         {state.valueNow}°

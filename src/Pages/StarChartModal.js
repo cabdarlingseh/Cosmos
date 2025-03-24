@@ -55,14 +55,16 @@ export default function StarChartModal() {
                 }
             );
             setStarChartUrl(response.data.data.imageUrl);
-        } catch (err) {
+        }
+        catch (err) {
             if (err.code === 'ECONNABORTED') {
                 setError('Request timed out. Please try again.');
             } else {
                 setError('Failed to generate star chart. Please check your inputs and try again.');
                 console.error('Error:', err.response ? err.response.data : err.message);
             }
-        } finally {
+        }
+        finally {
             setLoading(false);
         }
     };
@@ -131,7 +133,6 @@ export default function StarChartModal() {
         }, 200);
     };
 
-    // Loading State
     if (loading) {
         return (
             <Container className="text-center content-container">
@@ -146,7 +147,6 @@ export default function StarChartModal() {
         );
     }
 
-    // Error State (timeout or failure)
     if (error) {
         return (
             <Container className="text-center content-container">
@@ -176,7 +176,6 @@ export default function StarChartModal() {
         );
     }
 
-    // Success State
     if (starChartUrl) {
         return (
             <Container fluid className="content-container p-0">
@@ -206,7 +205,6 @@ export default function StarChartModal() {
         );
     }
 
-    // Form State
     return (
         <Container className="content-container star-chart-form">
             <h1 className="main_heading mb-4">Create a Star Chart</h1>
@@ -289,7 +287,7 @@ export default function StarChartModal() {
                         </ul>
                     )}
                     <Form.Text className="text-muted">
-                        Select a constellation or "None" for a general area view
+                        Select a constellation...
                     </Form.Text>
                 </Form.Group>
 
