@@ -144,32 +144,20 @@
             border-radius: 8px;
             margin: 0 auto;
             width: 75% !important;
-            height: 75% !important;
-        }
-
-        .carousel-caption {
-            background: rgba(0, 0, 0, 0.6);
-            border-radius: 4px;
-            padding: 10px 15px;
-
-            h3 {
-                font-size: 1.5rem;
-                font-weight: 600;
-                color: #ffffff;
-                margin-bottom: 5px;
-            }
-
-            p {
-                font-size: 1rem;
-                color: #cccccc;
-                margin: 0;
-            }
         }
     }
 }
 
 .space-art {
     margin-top: 20px;
+}
+
+.carousel-control-next-icon {
+    background-image: url('../images/chevron-right.svg');
+}
+
+.carousel-control-prev-icon {
+    background-image: url('../images/chevron-left.svg');
 }
 
 // Media Queries
@@ -197,14 +185,8 @@
     }
 
     .space-art-gallery {
-        .carousel.carousel-caption {
-            h3 {
-                font-size: 1.25rem;
-            }
-
-            p {
-                font-size: 0.9rem;
-            }
+        .carousel-image {
+            object-fit: cover;
         }
     }
 }
